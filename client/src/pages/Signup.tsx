@@ -2,6 +2,7 @@ import { useRef } from "react"
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
 import { useAuth } from "../context/AuthContext"
+import { FormEvent } from "react"
 
 export function Signup() {
   const { signup } = useAuth()
@@ -9,20 +10,13 @@ export function Signup() {
   const NameRef = useRef<HTMLInputElement>(null)
   const ImageUrlRef = useRef<HTMLInputElement>(null)
 
-  function handleSubmit(e: React.SyntheticEvent) {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (signup.isLoading) return
     const username = userNameRef.current?.value
     const name = NameRef.current?.value
     const imageUrl = ImageUrlRef.current?.value
-    if (
-      username === null ||
-      username === "" ||
-      name === null ||
-      name === "" ||
-      imageUrl === null ||
-      imageUrl === ""
-    ) {
+    if (username == null || username === "" || name == null || name === "") {
       return
 
       signup.mutate({
